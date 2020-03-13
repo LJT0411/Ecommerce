@@ -61,7 +61,7 @@
     margin: auto 5px auto 0px;
 }
 
-#mousedel , #KBdel {
+#mousedel , #KBdel , #HPMdel , #HPKBdel , #MicrosoftMdel , #MicrosoftKBdel {
     padding: 0;
     border: none;
     background: none;
@@ -69,18 +69,18 @@
     margin-left: 10px;
 }
 
-#mouseprice , #KBprice {
+#mouseprice , #KBprice , #HPMprice , #HPKBprice , #MicrosoftMprice , #MicrosoftKBprice {
     padding:0;
     border:none;
     background:none;
     margin-left:10px;
 }
 
-#mousetotal , #KBtotal{
+#mousetotal, #KBtotal, #HPMtotal, #HPKBtotal, #MicrosoftMtotal, #MicrosoftKBtotal {
     padding: 0;
     border: none;
     background: none;
-    margin:auto 10px;
+    margin: auto 10px;
 }
 
 
