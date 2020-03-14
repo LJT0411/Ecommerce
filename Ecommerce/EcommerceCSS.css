@@ -62,7 +62,7 @@
 }
 
 #mousedel , #KBdel , #HPMdel , #HPKBdel , #MicrosoftMdel , #MicrosoftKBdel {
-    padding: 0;
+    padding: 10px;
     border: none;
     background: none;
     color: red;
@@ -83,4 +83,40 @@
     margin: auto 10px;
 }
 
+
+.container2 {
+    width: 90%;
+    overflow: hidden;
+    background-color: lavender;
+    margin: 20px auto;
+    padding: 20px 20px;
+}
+
+.text, #item {
+    padding: 0;
+    border: none;
+    background: none;
+    margin: auto 2px;
+}
+
+#SubTotal {
+    padding: 0;
+    border: none;
+    background: none;
+    margin: auto 20px;
+}
+
+#ShipFee {
+    padding: 0;
+    border: none;
+    background: none;
+    margin: auto 44px;
+}
+
+#Total {
+    padding: 0;
+    border: none;
+    background: none;
+    margin: auto 95px;
+}
 
