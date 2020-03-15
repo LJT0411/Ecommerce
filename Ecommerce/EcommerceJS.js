@@ -1,10 +1,16 @@
-﻿var cartNo = "";
+﻿// This cart is used to store the total number that u ordered
+var cartNo = "";
 var cart = [];
+/////////////////////////////////////////////////////////////
+
+// This line used to store the total into the order summary
 var subtotal = 0;
 var itemtotal = 0;
 var shipfee = 10;
 var total = 0;
+/////////////////////////////////////////////////////////////
 
+// This line is used to list the item price
 var LGMouse = 45;
 var LGKeyboard = 50;
 
@@ -13,7 +19,9 @@ var HPKeyboard = 32;
 
 var MicrosoftMouse = 43;
 var MicrosoftKeyboard = 39;
+/////////////////////////////////////////////////////////////
 
+// This line is used to check the add to cart clicked or not
 var LGMouseClicked = false;
 var LGKeyboardClicked = false;
 
@@ -24,11 +32,11 @@ var MicrosoftMouseClicked = false;
 var MicrosoftKeyboardClicked = false;
 
 var ClearAppear = false;
-
 var cartLength = false;
-
 var ShipFeeIncluded = false;
+/////////////////////////////////////////////////////////////
 
+// This line is used to check which item that you clicked, and the total will increase
 var LGmousetotal = 1;
 var LGmouseclick = 1;
 var LGkeyboardtotal = 1;
@@ -43,17 +51,21 @@ var Microsoftmousetotal = 1;
 var Microsoftmouseclick = 1;
 var Microsoftkeyboardtotal = 1;
 var Microsoftkeyboardclick = 1;
+/////////////////////////////////////////////////////////////
 
+// This increaseOrder use array to store the item
 const increaseOrder = a => {
     cartNo += a;
     cart.push(a);
 }
 
+// This is used to display the output of the cart total
 const DisplayResult = () => {
     result = eval(cart.join(""));
     $("#cartTotal").html(result);
 }
 
+// This line used to display the total output below the item menu
 const LGMouseCal = () => {
     LGMouse = eval(LGMouse);
     $("#mousetotal").html(LGmousetotal);
@@ -89,7 +101,9 @@ const MicrosoftKBcal = () => {
     $("#MicrosoftKBtotal").html(Microsoftkeyboardtotal);
     $("#MicrosoftKBprice").html(MicrosoftKeyboard);
 }
+/////////////////////////////////////////////////////////////
 
+// This used to display the output of clear car after you clicked add to cart
 const ClearHtml = () => {
     debugger
     if (ClearAppear == false) {
@@ -98,6 +112,7 @@ const ClearHtml = () => {
     }
 }
 
+// This used to reset all things
 const ClearCart = () => {
     debugger
     $("#OrderSummary").html("");
@@ -140,6 +155,7 @@ const ClearCart = () => {
     MicrosoftKeyboard = 39;
 }
 
+// This used to display the order summary output
 const OrderSummary = () => {
     debugger
     if (cartLength == false) {
@@ -176,15 +192,18 @@ const OrderSummary = () => {
 
 
 $(document).ready(function () {
-
+    // For the comment, look at LogitechMouse enough, others are same thing
     $("#LogitechMouse").click(function (num) {
         debugger
+        // After click the add to cart , it will go in this if statement
+        // it will add into the array , and the cart will display the output
         if (LGMouseClicked == false) {
             increaseOrder("+" + num.target.value);
             LGMouseClicked = true;
         }
         DisplayResult();
 
+        // After click add to cart, it will go in this if statement, because the mouseclick is set to 1 from the start
         if (LGmouseclick == 1) {
 
             var chartlist = $("<div></div>").text("Logitech Mouse 45.00 ");
