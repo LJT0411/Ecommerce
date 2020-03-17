@@ -1,164 +1,180 @@
-﻿// This cart is used to store the total number that u ordered
-var cartNo = "";
-var cart = [];
-/////////////////////////////////////////////////////////////
-
-// This line used to store the total into the order summary
-var subtotal = 0;
-var itemtotal = 0;
-var shipfee = 10;
-var total = 0;
-/////////////////////////////////////////////////////////////
-
-// This line is used to list the item price
-var LGMouse = 45;
-var LGKeyboard = 50;
-
-var HPMouse = 35;
-var HPKeyboard = 32;
-
-var MicrosoftMouse = 43;
-var MicrosoftKeyboard = 39;
-/////////////////////////////////////////////////////////////
-
-// This line is used to check the add to cart clicked or not
-var LGMouseClicked = false;
-var LGKeyboardClicked = false;
-
-var HPMouseClicked = false;
-var HPKeyboardClicked = false;
-
-var MicrosoftMouseClicked = false;
-var MicrosoftKeyboardClicked = false;
-
-var ClearAppear = false;
+﻿
+var AddToCartClicked = false;
+var ClearTextAppear = false;
 var cartLength = false;
-var ShipFeeIncluded = false;
-/////////////////////////////////////////////////////////////
+var cart = [];
+var ItemCart = [];
+var ItemTotal = 0;
+var SubTotal = 0;
+var ShipFee = 10;
+var Total = 0;
 
-// This line is used to check which item that you clicked, and the total will increase
-var LGmousetotal = 1;
-var LGmouseclick = 1;
-var LGkeyboardtotal = 1;
-var LGkeyboardclick = 1;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var HPmousetotal = 1;
-var HPmouseclick = 1;
-var HPkeyboardtotal = 1;
-var HPkeyboardclick = 1;
+// This AllItems is an array, stored data
+const AllItems = [
+    {
+        ID: 1,
+        ProductName: "Logitech Mouse",
+        UnitPrice: 45,
+    },
+    {
+        ID: 2,
+        ProductName: "Logitech Keyboard",
+        UnitPrice: 50,
+    },
+    {
+        ID: 3,
+        ProductName: "HP Mouse",
+        UnitPrice: 35,
+    },
+    {
+        ID: 4,
+        ProductName: "HP Keyboard",
+        UnitPrice: 32,
+    },
+    {
+        ID: 5,
+        ProductName: "Microsoft Mouse",
+        UnitPrice: 43,
+    },
+    {
+        ID: 6,
+        ProductName: "Microsoft Keyboard",
+        UnitPrice: 39
+    }
+];
 
-var Microsoftmousetotal = 1;
-var Microsoftmouseclick = 1;
-var Microsoftkeyboardtotal = 1;
-var Microsoftkeyboardclick = 1;
-/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// This increaseOrder use array to store the item
-const increaseOrder = a => {
-    cartNo += a;
+// This cart is an array, used to store the ordered total
+const IncreaseOrder = (a) => {
     cart.push(a);
+    AddToCartClicked = false;
 }
 
-// This is used to display the output of the cart total
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Display the output , if u click 1 time add to cart button, 0 will become 1
 const DisplayResult = () => {
     result = eval(cart.join(""));
     $("#cartTotal").html(result);
 }
 
-// This line used to display the total output below the item menu
-const LGMouseCal = () => {
-    LGMouse = eval(LGMouse);
-    $("#mousetotal").html(LGmousetotal);
-    $("#mouseprice").html(LGMouse);
-}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const LGKBCal = () => {
-    LGKeyboard = eval(LGKeyboard);
-    $("#KBtotal").html(LGkeyboardtotal);
-    $("#KBprice").html(LGKeyboard);
-}
-
-const HPMousecal = () => {
-    HPMouse = eval(HPMouse);
-    $("#HPMtotal").html(HPmousetotal);
-    $("#HPMprice").html(HPMouse);
-}
-
-const HPKBcal = () => {
-    HPKeyboard = eval(HPKeyboard);
-    $("#HPKBtotal").html(HPkeyboardtotal);
-    $("#HPKBprice").html(HPKeyboard);
-}
-
-const MicrosoftMousecal = () => {
-    MicrosoftMouse = eval(MicrosoftMouse);
-    $("#MicrosoftMtotal").html(Microsoftmousetotal);
-    $("#MicrosoftMprice").html(MicrosoftMouse);
-}
-
-const MicrosoftKBcal = () => {
-    MicrosoftKeyboard = eval(MicrosoftKeyboard);
-    $("#MicrosoftKBtotal").html(Microsoftkeyboardtotal);
-    $("#MicrosoftKBprice").html(MicrosoftKeyboard);
-}
-/////////////////////////////////////////////////////////////
-
-// This used to display the output of clear car after you clicked add to cart
-const ClearHtml = () => {
-    debugger
-    if (ClearAppear == false) {
+// Display the clear cart text inside the button of ClearAll
+const DisplayClearText = () => {
+    if (ClearTextAppear == false) {
         $("#ClearAll").html("Clear Cart");
-        ClearAppear = true;
+        ClearTextAppear = true;
     }
 }
 
-// This used to reset all things
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Generate the item list at home page
+const GenerateItemMenu = () => {
+    for (var i = 0; i < AllItems.length; i++) {
+        htmlProduct = `
+                   <ul>
+                   <li>${AllItems[i].ProductName} <br /><br />
+                    RM ${AllItems[i].UnitPrice}
+                   <button class="addCart" id="${AllItems[i].ID}">Add to cart</button>
+                   </li>
+                   </ul>`;
+
+        document.getElementById("productRow").innerHTML = document.getElementById("productRow").innerHTML + htmlProduct;
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// This is like a linq logic that stored the data
+const GenerateList = () => {
+    for (var i = 0; i < AllItems.length; i++) {
+        if (AllItems[i].ID == 1) {
+            LGMouseList = AllItems[i];
+        }
+        if (AllItems[i].ID == 2) {
+            LGKeyboardList = AllItems[i]
+        }
+        if (AllItems[i].ID == 3) {
+            HPMouseList = AllItems[i]
+        }
+        if (AllItems[i].ID == 4) {
+            HPKeyboardList = AllItems[i]
+        }
+        if (AllItems[i].ID == 5) {
+            MCMouseList = AllItems[i]
+        }
+        if (AllItems[i].ID == 6) {
+            MCKeyboardList = AllItems[i]
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Once u click add to cart, it will show a list below the menu, if you click the x, it will run this method
+const DeleteItem = () => {
+    cart.length -= 1;
+    if (cart.length == 0) {
+        $("#OrderSummary").html("");
+        $("#cartList").html("");
+        $("#cartTotal").html(0);
+        $("#cartList").append("<button id=ClearAll>");
+        ClearTextAppear = false;
+        cartLength = false;
+        ItemTotal = 0;
+        SubTotal = 0;
+        Total = 0;
+    }
+    else {
+        DisplayResult();
+        OrderSummary();
+    }
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// After u click the x, it will run this method too, it will minus the subtotal and total of Order Summary
+const AfterDeleteItem = (a) => {
+    SubTotal -= (a);
+    Total -= (a);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// This method is reset all things to default
 const ClearCart = () => {
-    debugger
     $("#OrderSummary").html("");
     $("#cartList").html("");
     $("#cartTotal").html(0);
     $("#cartList").append("<button id=ClearAll>");
-    LGMouseClicked = false;
-    LGKeyboardClicked = false;
-    HPMouseClicked = false;
-    HPKeyboardClicked = false;
-    MicrosoftMouseClicked = false;
-    MicrosoftKeyboardClicked = false;
-    ClearAppear = false;
-    cartLength = false;
-    ShipFeeIncluded = false;
     cart = [];
-    subtotal = 0;
-    itemtotal = 0;
-    total = 0;
-
-    LGmouseclick = 1;
-    LGkeyboardclick = 1;
-    HPmouseclick = 1;
-    HPkeyboardclick = 1;
-    Microsoftmouseclick = 1;
-    Microsoftkeyboardclick = 1;
-
-    LGmousetotal = 1;
-    LGkeyboardtotal = 1;
-    HPmousetotal = 1;
-    HPkeyboardtotal = 1;
-    Microsoftmousetotal = 1;
-    Microsoftkeyboardtotal = 1;
-
-    LGMouse = 45;
-    LGKeyboard = 50;
-    HPMouse = 35;
-    HPKeyboard = 32;
-    MicrosoftMouse = 43;
-    MicrosoftKeyboard = 39;
+    ItemCart = [];
+    LGMouseList.UnitPrice = 45;
+    LGKeyboardList.UnitPrice = 50;
+    HPMouseList.UnitPrice = 35;
+    HPKeyboardList.UnitPrice = 32;
+    MCMouseList.UnitPrice = 43;
+    MCKeyboardList.UnitPrice = 39;
+    AddToCartClicked = false;
+    ClearTextAppear = false;
+    cartLength = false;
+    ItemTotal = 0;
+    SubTotal = 0;
+    Total = 0;
 }
 
-// This used to display the order summary output
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// After u click add to cart button, it will run this method to show the order summary
 const OrderSummary = () => {
-    debugger
     if (cartLength == false) {
+        // This if statement will run one time only once you click add to cart button
         if (cart.length != 0) {
             $("#OrderSummary").append("<br/>");
             $("#OrderSummary").append("<h4>Order Summary</h4>");
@@ -174,70 +190,122 @@ const OrderSummary = () => {
             $("#OrderSummary").append("<button class=text>Total</button>");
             $("#OrderSummary").append("<button id=Total></button>");
 
-            $("#item").html(itemtotal);
-            $("#SubTotal").html(subtotal);
-            $("#ShipFee").html(shipfee);
-            total = total + shipfee;
-            $("#Total").html(total);
+            $("#item").html(ItemTotal);
+            $("#SubTotal").html(SubTotal);
+            $("#ShipFee").html(ShipFee);
+            Total = Total + ShipFee;
+            $("#Total").html(Total);
             cartLength = true;
         }
     }
     else {
-        $("#item").html(itemtotal);
-        $("#SubTotal").html(subtotal);
-        $("#ShipFee").html(shipfee);
-        $("#Total").html(total);
+        $("#item").html(ItemTotal);
+        $("#SubTotal").html(SubTotal);
+        $("#ShipFee").html(ShipFee);
+        $("#Total").html(Total);
     }
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// This is update the output of the Order Summary
+const IncreaseOrderSummary = (a) => {
+    ItemTotal += 1;
+    SubTotal += (a);
+    Total += (a);
+}
+
+const ReduceOrderSummary = (a) => {
+    ItemTotal -= 1;
+    SubTotal -= (a);
+    Total -= (a);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// This method used to calculate the total of the items price and quantity, others method are same
+const LGMouseCal = () => {
+    LGMouseList.UnitPrice = eval(LGMouseList.UnitPrice);
+    $("#mousetotal").html(LGMouseQuantity);
+    $("#mouseprice").html(LGMouseList.UnitPrice);
+}
+
+const LGKeyboardCal = () => {
+    LGKeyboardList.UnitPrice = eval(LGKeyboardList.UnitPrice);
+    $("#KBtotal").html(LGKeyboardQuantity);
+    $("#KBprice").html(LGKeyboardList.UnitPrice);
+}
+
+const HPMouseCal = () => {
+    HPMouseList.UnitPrice = eval(HPMouseList.UnitPrice);
+    $("#mousetotal").html(HPMouseQuantity);
+    $("#mouseprice").html(HPMouseList.UnitPrice);
+}
+
+const HPKeyboardCal = () => {
+    HPKeyboardList.UnitPrice = eval(HPKeyboardList.UnitPrice);
+    $("#mousetotal").html(HPKeyboardQuantity);
+    $("#mouseprice").html(HPKeyboardList.UnitPrice);
+}
+
+const MCMouseCal = () => {
+    MCMouseList.UnitPrice = eval(MCMouseList.UnitPrice);
+    $("#mousetotal").html(MCMouseQuantity);
+    $("#mouseprice").html(MCMouseList.UnitPrice);
+}
+
+const MCKeyboardCal = () => {
+    MCKeyboardList.UnitPrice = eval(MCKeyboardList.UnitPrice);
+    $("#mousetotal").html(MCKeyboardQuantity);
+    $("#mouseprice").html(MCKeyboardList.UnitPrice);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document).ready(function () {
-    // For the comment, look at LogitechMouse enough, others are same thing
-    $("#LogitechMouse").click(function (num) {
-        debugger
-        // After click the add to cart , it will go in this if statement
-        // it will add into the array , and the cart will display the output
-        if (LGMouseClicked == false) {
-            increaseOrder("+" + num.target.value);
-            LGMouseClicked = true;
+    GenerateItemMenu();
+    GenerateList();
+
+    $("#1").click(function () {
+        // Check the ItemCart have this product or not, by default is false
+        if (ItemCart.includes(LGMouseList.ProductName) == false) {
+            IncreaseOrder("+" + 1);
+            ItemCart.push(LGMouseList.ProductName);
         }
         DisplayResult();
 
-        // After click add to cart, it will go in this if statement, because the mouseclick is set to 1 from the start
-        if (LGmouseclick == 1) {
-
-            var chartlist = $("<div></div>").text("Logitech Mouse 45.00 ");
-
-            $(chartlist).append("<button id=mouseplus value=+>+</button>");
-            $(chartlist).append("<button id=mousetotal value=1>1</button>");
-            $(chartlist).append("<button id=mouseminus value=->-</button>");
-            $(chartlist).append("<button id=mouseprice>45.00</button>");
-            $(chartlist).append("<button id=mousedel>x</button>");
-
+        // Check the ItemCart have this product or not, by default AddToCartClicked is false 
+        // and ItemCart will become true after the first if statement
+        // This if statement will run one time only because i set AddToCartClicked to true 
+        // so it wont come in this if statement because both are true
+        if (AddToCartClicked == false && ItemCart.includes(LGMouseList.ProductName) == true) {
+            var chartlist = $("<div></div>").text(LGMouseList.ProductName + " " + LGMouseList.UnitPrice + " ");
+            $(chartlist).append("<button id=mouseplus >+</button>");
+            $(chartlist).append("<button id=mousetotal >1</button>");
+            $(chartlist).append("<button id=mouseminus >-</button>");
+            $(chartlist).append("<button id=mouseprice >" + LGMouseList.UnitPrice + "</button>");
+            $(chartlist).append("<button id=mousedel >x</button>");
             $("#cartList").append(chartlist);
-            LGmouseclick += 1;  
-            subtotal += 45;
-            itemtotal += 1;
-            total += 45;
+            AddToCartClicked = true;
+            LGMouseQuantity = 1;
+            IncreaseOrderSummary(45);
 
+            // Everytime u click the plus at the list there, it will run this function
             $("#mouseplus").click(function () {
-                debugger
-                LGmousetotal += 1;
-                itemtotal += 1;
-                LGMouse += 45;
-                subtotal += 45;
-                total += 45;
+                LGMouseQuantity += 1;
+                LGMouseList.UnitPrice += 45;
+                IncreaseOrderSummary(45);
                 LGMouseCal();
                 OrderSummary();
             })
 
+            // Everytime u click the minus at the list there, it will run this function
             $("#mouseminus").click(function () {
+                // This if statement is to prevent the total become 0
                 if ($("#mousetotal").html() != 1) {
-                    LGmousetotal -= 1;
-                    itemtotal -= 1;
-                    LGMouse -= 45;
-                    subtotal -= 45;
-                    total -= 45;
+                    LGMouseQuantity -= 1;
+                    LGMouseList.UnitPrice -= 45;
+                    ReduceOrderSummary(45);
                     LGMouseCal();
                     OrderSummary();
                 }
@@ -246,76 +314,75 @@ $(document).ready(function () {
                 }
             })
 
+            // Everytime u click the x at the list there, it will run this function
             $("#mousedel").click(function () {
+                // Remove the list
                 $(this).parent().remove();
-                LGMouseClicked = false;
-                LGmouseclick = 1;
-                cart.length -= 1;
-                if (cart.length == 0) {
-                    $("#cartTotal").html(0);
-                }
-                else {
-                    DisplayResult();
-                }
+                // ItemTotal at Order Summary there will minus the total of mouse quantity
+                ItemTotal -= LGMouseQuantity;
+                AfterDeleteItem(LGMouseList.UnitPrice);
+                // Reset the Unitprice
+                LGMouseList.UnitPrice = 45;
+                // To grab the targeted item length of the array and remove it by using splice
+                // Example your array got two items, array = ["a","b","c"] , so the a is 0, b is 1, c is 2
+                // from this ItemCart.indexOf(b), item will become 1
+                // use .splice() to remove the item that you want to
+                // .splice(item,1) that 1 is delete count that you want to delete
+                var item = ItemCart.indexOf(LGMouseList.ProductName);
+                ItemCart.splice(item, 1);
+                DeleteItem();
             })
 
+            // Everytime u click the Clear Cart at the list there, it will run this function
             $("#ClearAll").click(function () {
                 ClearCart();
             })
         }
         else {
-            LGmousetotal += 1;
-            itemtotal += 1;
-            LGMouse += 45;
-            subtotal += 45;
-            total += 45;
+            LGMouseQuantity += 1;
+            LGMouseList.UnitPrice += 45;
+            IncreaseOrderSummary(45);
             LGMouseCal();
         }
-        ClearHtml();
+        DisplayClearText();
         OrderSummary();
     })
 
-    $("#LogitechKeyboard").click(function (num) {
+    $("#2").click(function () {
 
-        if (LGKeyboardClicked == false) {
-            increaseOrder("+" + num.target.value);
-            LGKeyboardClicked = true;
+        if (ItemCart.includes(LGKeyboardList.ProductName) == false) {
+            IncreaseOrder("+" + 1);
+            ItemCart.push(LGKeyboardList.ProductName);
         }
         DisplayResult();
 
-        if (LGkeyboardclick == 1) {
-            var chartlist = $("<div></div>").text("Logitech Keyboard 50.00 ");
+        if (AddToCartClicked == false && ItemCart.includes(LGKeyboardList.ProductName) == true) {
+            var chartlist = $("<div></div>").text(LGKeyboardList.ProductName + " " + LGKeyboardList.UnitPrice + " ");
 
-            $(chartlist).append("<button id=KBplus value=+>+</button>");
-            $(chartlist).append("<button id=KBtotal value=1>1</button>");
-            $(chartlist).append("<button id=KBminus value=->-</button>");
-            $(chartlist).append("<button id=KBprice>50.00</button>");
-            $(chartlist).append("<button id=KBdel>x</button>");
-
+            $(chartlist).append("<button id=KBplus >+</button>");
+            $(chartlist).append("<button id=KBtotal >1</button>");
+            $(chartlist).append("<button id=KBminus >-</button>");
+            $(chartlist).append("<button id=KBprice >" + LGKeyboardList.UnitPrice + "</button>");
+            $(chartlist).append("<button id=KBdel >x</button>");
             $("#cartList").append(chartlist);
-            LGkeyboardclick += 1;
-            subtotal += 50;
-            itemtotal += 1;
-            total += 50;
+            AddToCartClicked = true;
+            LGKeyboardQuantity = 1;
+            IncreaseOrderSummary(50);
 
             $("#KBplus").click(function () {
-                LGkeyboardtotal += 1;
-                LGKeyboard += 50;
-                subtotal += 50;
-                total += 50;
-                itemtotal += 1;
-                LGKBCal();
+                LGKeyboardQuantity += 1;
+                LGKeyboardList.UnitPrice += 50;
+                IncreaseOrderSummary(50);
+                LGKeyboardCal();
                 OrderSummary();
             })
 
             $("#KBminus").click(function () {
                 if ($("#KBtotal").html() != 1) {
-                    LGkeyboardtotal -= 1;
-                    LGKeyboard -= 50;
-                    subtotal -= 50;
-                    itemtotal -= 1;
-                    total -= 50;
-                    LGKBCal();
+                    LGKeyboardQuantity -= 1;
+                    LGKeyboardList.UnitPrice -= 50;
+                    ReduceOrderSummary(50);
+                    LGKeyboardCal();
                     OrderSummary();
                 }
                 else {
@@ -325,15 +392,12 @@ $(document).ready(function () {
 
             $("#KBdel").click(function () {
                 $(this).parent().remove();
-                LGKeyboardClicked = false;
-                LGkeyboardclick = 1;
-                cart.length -= 1;
-                if (cart.length == 0) {
-                    $("#cartTotal").html(0);
-                }
-                else {
-                    DisplayResult();
-                }
+                ItemTotal -= LGKeyboardQuantity;
+                AfterDeleteItem(LGKeyboardList.UnitPrice);
+                DeleteItem();
+                LGKeyboardList.UnitPrice = 50;
+                var item = ItemCart.indexOf(LGKeyboardList.ProductName);
+                ItemCart.splice(item, 1);
             })
 
             $("#ClearAll").click(function () {
@@ -341,58 +405,50 @@ $(document).ready(function () {
             })
         }
         else {
-            LGkeyboardtotal += 1;
-            LGKeyboard += 50;
-            subtotal += 50;
-            itemtotal += 1;
-            total += 50;
-            LGKBCal();
+            LGKeyboardQuantity += 1;
+            LGKeyboardList.UnitPrice += 50;
+            IncreaseOrderSummary(50);
+            LGKeyboardCal();
         }
-        ClearHtml();
+        DisplayClearText();
         OrderSummary();
     })
 
-    $("#HPMouse").click(function (num) {
+    $("#3").click(function () {
 
-        if (HPMouseClicked == false) {
-            increaseOrder("+" + num.target.value);
-            HPMouseClicked = true;
+        if (ItemCart.includes(HPMouseList.ProductName) == false) {
+            IncreaseOrder("+" + 1);
+            ItemCart.push(HPMouseList.ProductName);
         }
         DisplayResult();
 
-        if (HPmouseclick == 1) {
-            var chartlist = $("<div></div>").text("HP Mouse 35.00 ");
+        if (AddToCartClicked == false && ItemCart.includes(HPMouseList.ProductName) == true) {
+            var chartlist = $("<div></div>").text(HPMouseList.ProductName + " " + HPMouseList.UnitPrice + " ");
 
-            $(chartlist).append("<button id=HPMplus value=+>+</button>");
-            $(chartlist).append("<button id=HPMtotal value=1>1</button>");
-            $(chartlist).append("<button id=HPMminus value=->-</button>");
-            $(chartlist).append("<button id=HPMprice>35.00</button>");
-            $(chartlist).append("<button id=HPMdel>x</button>");
-
+            $(chartlist).append("<button id=HPMplus >+</button>");
+            $(chartlist).append("<button id=HPMtotal >1</button>");
+            $(chartlist).append("<button id=HPMminus >-</button>");
+            $(chartlist).append("<button id=HPMprice >" + HPMouseList.UnitPrice + "</button>");
+            $(chartlist).append("<button id=HPMdel >x</button>");
             $("#cartList").append(chartlist);
-            HPmouseclick += 1;
-            subtotal += 35;
-            itemtotal += 1;
-            total += 35;
+            AddToCartClicked = true;
+            HPMouseQuantity = 1;
+            IncreaseOrderSummary(35);
 
             $("#HPMplus").click(function () {
-                HPmousetotal += 1;
-                HPMouse += 35;
-                subtotal += 35;
-                itemtotal += 1;
-                total += 35;
-                HPMousecal();
+                HPMouseQuantity += 1;
+                HPMouseList.UnitPrice += 35;
+                IncreaseOrderSummary(35);
+                HPMouseCal();
                 OrderSummary();
             })
 
             $("#HPMminus").click(function () {
                 if ($("#HPMtotal").html() != 1) {
-                    HPmousetotal -= 1;
-                    HPMouse -= 35;
-                    subtotal -= 35;
-                    itemtotal -= 1;
-                    total -= 35;
-                    HPMousecal();
+                    HPMouseQuantity -= 1;
+                    HPMouseList.UnitPrice -= 35;
+                    ReduceOrderSummary(35);
+                    HPMouseCal();
                     OrderSummary();
                 }
                 else {
@@ -402,73 +458,63 @@ $(document).ready(function () {
 
             $("#HPMdel").click(function () {
                 $(this).parent().remove();
-                HPMouseClicked = false;
-                HPmouseclick = 1;
-                cart.length -= 1;
-                if (cart.length == 0) {
-                    $("#cartTotal").html(0);
-                }
-                else {
-                    DisplayResult();
-                }
+                ItemTotal -= HPMouseQuantity;
+                AfterDeleteItem(HPMouseList.UnitPrice);
+                DeleteItem();
+                HPMouseList.UnitPrice = 35;
+                var item = ItemCart.indexOf(HPMouseList.ProductName);
+                ItemCart.splice(item, 1);
             })
+
             $("#ClearAll").click(function () {
                 ClearCart();
             })
         }
         else {
-            HPmousetotal += 1;
-            HPMouse += 35;
-            subtotal += 35;
-            itemtotal += 1;
-            total += 35;
-            HPMousecal();
+            HPMouseQuantity += 1;
+            HPMouseList.UnitPrice += 35;
+            IncreaseOrderSummary(35);
+            HPMouseCal();
         }
-        ClearHtml();
+        DisplayClearText();
         OrderSummary();
     })
 
-    $("#HPKeyboard").click(function (num) {
-     
-        if (HPKeyboardClicked == false) {
-            increaseOrder("+" + num.target.value);
-            HPKeyboardClicked = true;
+    $("#4").click(function () {
+
+        if (ItemCart.includes(HPKeyboardList.ProductName) == false) {
+            IncreaseOrder("+" + 1);
+            ItemCart.push(HPKeyboardList.ProductName);
         }
         DisplayResult();
 
-        if (HPkeyboardclick == 1) {
-            var chartlist = $("<div></div>").text("HP Keyboard 32.00 ");
+        if (AddToCartClicked == false && ItemCart.includes(HPKeyboardList.ProductName) == true) {
+            var chartlist = $("<div></div>").text(HPKeyboardList.ProductName + " " + HPKeyboardList.UnitPrice + " ");
 
-            $(chartlist).append("<button id=HPKBplus value=+>+</button>");
-            $(chartlist).append("<button id=HPKBtotal value=1>1</button>");
-            $(chartlist).append("<button id=HPKBminus value=->-</button>");
-            $(chartlist).append("<button id=HPKBprice>32.00</button>");
-            $(chartlist).append("<button id=HPKBdel>x</button>");
-
+            $(chartlist).append("<button id=HPKBplus >+</button>");
+            $(chartlist).append("<button id=HPKBtotal >1</button>");
+            $(chartlist).append("<button id=HPKBminus >-</button>");
+            $(chartlist).append("<button id=HPKBprice >" + HPKeyboardList.UnitPrice + "</button>");
+            $(chartlist).append("<button id=HPKBdel >x</button>");
             $("#cartList").append(chartlist);
-            HPkeyboardclick += 1;
-            subtotal += 32;
-            itemtotal += 1;
-            total += 32;
+            AddToCartClicked = true;
+            HPKeyboardQuantity = 1;
+            IncreaseOrderSummary(32);
 
             $("#HPKBplus").click(function () {
-                HPkeyboardtotal += 1;
-                HPKeyboard += 32;
-                subtotal += 32;
-                itemtotal += 1;
-                total += 32;
-                HPKBcal();
+                HPKeyboardQuantity += 1;
+                HPKeyboardList.UnitPrice += 32;
+                IncreaseOrderSummary(32);
+                HPKeyboardCal();
                 OrderSummary();
             })
 
             $("#HPKBminus").click(function () {
                 if ($("#HPKBtotal").html() != 1) {
-                    HPkeyboardtotal -= 1;
-                    HPKeyboard -= 32;
-                    subtotal -= 32;
-                    itemtotal -= 1;
-                    total -= 32;
-                    HPKBcal();
+                    HPKeyboardQuantity -= 1;
+                    HPKeyboardList.UnitPrice -= 32;
+                    ReduceOrderSummary(32);
+                    HPKeyboardCal();
                     OrderSummary();
                 }
                 else {
@@ -478,188 +524,161 @@ $(document).ready(function () {
 
             $("#HPKBdel").click(function () {
                 $(this).parent().remove();
-                HPKeyboardClicked = false;
-                HPkeyboardclick = 1;
-                cart.length -= 1;
-                if (cart.length == 0) {
-                    $("#cartTotal").html(0);
-                }
-                else {
-                    DisplayResult();
-                }
+                ItemTotal -= HPKeyboardQuantity;
+                AfterDeleteItem(HPKeyboardList.UnitPrice);
+                DeleteItem();
+                HPKeyboardList.UnitPrice = 32;
+                var item = ItemCart.indexOf(HPKeyboardList.ProductName);
+                ItemCart.splice(item, 1);
             })
+
             $("#ClearAll").click(function () {
                 ClearCart();
             })
         }
         else {
-            HPkeyboardtotal += 1;
-            HPKeyboard += 32;
-            subtotal += 32;
-            itemtotal += 1;
-            total += 32;
-            HPKBcal();
+            HPKeyboardQuantity += 1;
+            HPKeyboardList.UnitPrice += 32;
+            IncreaseOrderSummary(32);
+            HPKeyboardCal();
         }
-        ClearHtml();
+        DisplayClearText();
         OrderSummary();
     })
 
-    $("#MicrosoftMouse").click(function (num) {
-       
-        if (MicrosoftMouseClicked == false) {
-            increaseOrder("+" + num.target.value);
-            MicrosoftMouseClicked = true;
+    $("#5").click(function () {
+
+        if (ItemCart.includes(MCMouseList.ProductName) == false) {
+            IncreaseOrder("+" + 1);
+            ItemCart.push(MCMouseList.ProductName);
         }
         DisplayResult();
 
-        if (Microsoftmouseclick == 1) {
-            var chartlist = $("<div></div>").text("Microsoft Mouse 43.00 ");
+        if (AddToCartClicked == false && ItemCart.includes(MCMouseList.ProductName) == true) {
+            var chartlist = $("<div></div>").text(MCMouseList.ProductName + " " + MCMouseList.UnitPrice + " ");
 
-            $(chartlist).append("<button id=MicrosoftMplus value=+>+</button>");
-            $(chartlist).append("<button id=MicrosoftMtotal value=1>1</button>");
-            $(chartlist).append("<button id=MicrosoftMminus value=->-</button>");
-            $(chartlist).append("<button id=MicrosoftMprice>43.00</button>");
-            $(chartlist).append("<button id=MicrosoftMdel>x</button>");
-
+            $(chartlist).append("<button id=MCMplus >+</button>");
+            $(chartlist).append("<button id=MCMtotal >1</button>");
+            $(chartlist).append("<button id=MCMminus >-</button>");
+            $(chartlist).append("<button id=MCMprice >" + MCMouseList.UnitPrice + "</button>");
+            $(chartlist).append("<button id=MCMdel >x</button>");
             $("#cartList").append(chartlist);
-            Microsoftmouseclick += 1;
-            subtotal += 43;
-            itemtotal += 1;
-            total += 43;
+            AddToCartClicked = true;
+            MCMouseQuantity = 1;
+            IncreaseOrderSummary(43);
 
-            $("#MicrosoftMplus").click(function () {
-                Microsoftmousetotal += 1;
-                MicrosoftMouse += 43;
-                subtotal += 43;
-                itemtotal += 1;
-                total += 43;
-                MicrosoftMousecal();
+            $("#MCMplus").click(function () {
+                MCMouseQuantity += 1;
+                MCMouseList.UnitPrice += 43;
+                IncreaseOrderSummary(43);
+                MCMouseCal();
                 OrderSummary();
             })
 
-            $("#MicrosoftMminus").click(function () {
-                if ($("#MicrosoftMtotal").html() != 1) {
-                    Microsoftmousetotal -= 1;
-                    MicrosoftMouse -= 43;
-                    subtotal -= 43;
-                    itemtotal -= 1;
-                    total -= 43;
-                    MicrosoftMousecal();
+            $("#MCMminus").click(function () {
+                if ($("#MCMtotal").html() != 1) {
+                    MCMouseQuantity -= 1;
+                    MCMouseList.UnitPrice -= 43;
+                    ReduceOrderSummary(43);
+                    MCMouseCal();
                     OrderSummary();
                 }
                 else {
-                    $("#MicrosoftMtotal").html(1);
+                    $("#MCMtotal").html(1);
                 }
             })
 
-            $("#MicrosoftMdel").click(function () {
+            $("#MCMdel").click(function () {
                 $(this).parent().remove();
-                MicrosoftMouseClicked = false;
-                Microsoftmouseclick = 1;
-                cart.length -= 1;
-                if (cart.length == 0) {
-                    $("#cartTotal").html(0);
-                }
-                else {
-                    DisplayResult();
-                }
+                ItemTotal -= MCMouseQuantity;
+                AfterDeleteItem(MCMouseList.UnitPrice);
+                DeleteItem();
+                MCMouseList.UnitPrice = 43;
+                var item = ItemCart.indexOf(MCMouseList.ProductName);
+                ItemCart.splice(item, 1);
             })
+
             $("#ClearAll").click(function () {
                 ClearCart();
             })
         }
         else {
-            Microsoftmousetotal += 1;
-            MicrosoftMouse += 43;
-            subtotal += 43;
-            itemtotal += 1;
-            total += 43;
-            MicrosoftMousecal();
+            MCMouseQuantity += 1;
+            MCMouseList.UnitPrice += 43;
+            IncreaseOrderSummary(43);
+            MCMouseCal();
         }
-        ClearHtml();
+        DisplayClearText();
         OrderSummary();
     })
 
-    $("#MicrosoftKeyboard").click(function (num) {
+    $("#6").click(function () {
 
-        if (MicrosoftKeyboardClicked == false) {
-            increaseOrder("+" + num.target.value);
-            MicrosoftKeyboardClicked = true;
-        }
-        else if (cart.length > 0) {
+        if (ItemCart.includes(MCKeyboardList.ProductName) == false) {
+            IncreaseOrder("+" + 1);
+            ItemCart.push(MCKeyboardList.ProductName);
         }
         DisplayResult();
 
-        if (Microsoftkeyboardclick == 1) {
-            var chartlist = $("<div></div>").text("Microsoft Keyboard 39.00 ");
+        if (AddToCartClicked == false && ItemCart.includes(MCKeyboardList.ProductName) == true) {
+            var chartlist = $("<div></div>").text(MCKeyboardList.ProductName + " " + MCKeyboardList.UnitPrice + " ");
 
-            $(chartlist).append("<button id=MicrosoftKBplus value=+>+</button>");
-            $(chartlist).append("<button id=MicrosoftKBtotal value=1>1</button>");
-            $(chartlist).append("<button id=MicrosoftKBminus value=->-</button>");
-            $(chartlist).append("<button id=MicrosoftKBprice>39.00</button>");
-            $(chartlist).append("<button id=MicrosoftKBdel>x</button>");
-            
+            $(chartlist).append("<button id=MCKBplus >+</button>");
+            $(chartlist).append("<button id=MCKBtotal >1</button>");
+            $(chartlist).append("<button id=MCKBminus >-</button>");
+            $(chartlist).append("<button id=MCKBprice >" + MCKeyboardList.UnitPrice + "</button>");
+            $(chartlist).append("<button id=MCKBdel >x</button>");
             $("#cartList").append(chartlist);
-            Microsoftkeyboardclick += 1;
-            subtotal += 39;
-            itemtotal += 1;
-            total += 39;
+            AddToCartClicked = true;
+            MCKeyboardQuantity = 1;
+            IncreaseOrderSummary(39);
 
-            $("#MicrosoftKBplus").click(function () {
-                Microsoftkeyboardtotal += 1;
-                MicrosoftKeyboard += 39;
-                subtotal += 39;
-                itemtotal += 1;
-                total += 39;
-                MicrosoftKBcal();
+            $("#MCKBplus").click(function () {
+                MCKeyboardQuantity += 1;
+                MCKeyboardList.UnitPrice += 39;
+                IncreaseOrderSummary(39);
+                MCKeyboardCal();
                 OrderSummary();
             })
 
-            $("#MicrosoftKBminus").click(function () {
-                if ($("#MicrosoftKBtotal").html() != 1) {
-                    Microsoftkeyboardtotal -= 1;
-                    MicrosoftKeyboard -= 39;
-                    subtotal -= 39;
-                    itemtotal -= 1;
-                    total -= 39;
-                    MicrosoftKBcal();
+            $("#MCKBminus").click(function () {
+                if ($("#MCKBtotal").html() != 1) {
+                    MCKeyboardQuantity -= 1;
+                    MCKeyboardList.UnitPrice -= 39;
+                    ReduceOrderSummary(39);
+                    MCKeyboardCal();
                     OrderSummary();
                 }
                 else {
-                    $("#MicrosoftKBtotal").html(1);
+                    $("#MCKBtotal").html(1);
                 }
             })
 
-            $("#MicrosoftKBdel").click(function () {
+            $("#MCKBdel").click(function () {
                 $(this).parent().remove();
-                MicrosoftKeyboardClicked = false;
-                Microsoftkeyboardclick = 1;
-                cart.length -= 1;
-                if (cart.length == 0) {
-                    $("#cartTotal").html(0);
-                }
-                else {
-                    DisplayResult();
-                }
+                ItemTotal -= MCKeyboardQuantity;
+                AfterDeleteItem(MCKeyboardList.UnitPrice);
+                DeleteItem();
+                MCKeyboardList.UnitPrice = 39;
+                var item = ItemCart.indexOf(MCKeyboardList.ProductName);
+                ItemCart.splice(item, 1);
             })
+
             $("#ClearAll").click(function () {
                 ClearCart();
             })
         }
         else {
-            Microsoftkeyboardtotal += 1;
-            MicrosoftKeyboard += 39;
-            subtotal += 39;
-            itemtotal += 1;
-            total += 39;
-            MicrosoftKBcal();
+            MCKeyboardQuantity += 1;
+            MCKeyboardList.UnitPrice += 39;
+            IncreaseOrderSummary(39);
+            MCKeyboardCal();
         }
-        ClearHtml();
+        DisplayClearText();
         OrderSummary();
     })
 
     $("#ClearAll").click(function () {
-        debugger
         ClearCart();
     })
 

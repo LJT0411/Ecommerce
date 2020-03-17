@@ -1,67 +1,70 @@
-﻿.container {
-    width:90%;
-    overflow:hidden;
+﻿body {
+}
+
+.container {
+    width: 90%;
+    overflow: hidden;
     background-color: lavender;
-    margin :20px auto;
-    padding:50px 0px;
+    margin: 20px auto;
+    padding: 50px 0px;
 }
 
-.container ul {
-    padding:0px;
-    margin:0px;
-}
+    .container ul {
+        padding: 0px;
+        margin: 0px;
+    }
 
-.container ul li {
-    list-style: none;
-    float:left;
-    width:20%;
-    height:150px;
-    background-color:white;
-    margin:30px 40px 0px 120px;
-    text-align:center;
-    font-size:24px;
-}
+        .container ul li {
+            list-style: none;
+            float: left;
+            width: 20%;
+            height: 150px;
+            background-color: white;
+            margin: 30px 40px 0px 120px;
+            text-align: center;
+            font-size: 24px;
+        }
 
-.container ul li .addCart:hover {
-    background-color: lightgrey;
-}
+            .container ul li .addCart:hover {
+                background-color: lightgrey;
+            }
 
-.container ul li .addCart {
-    width:100%;
-    height:50px;
-    line-height:50px;
-    background-color:black;
-    text-align:center;
-    color:white;
-    margin:30px auto;
-}
+            .container ul li .addCart {
+                width: 100%;
+                height: 50px;
+                line-height: 50px;
+                background-color: black;
+                text-align: center;
+                color: white;
+                margin: 30px auto;
+            }
 
 @media screen and (max-width:1250px) {
-    .container ul li{
-        width:40%;
-        margin-left:50px;
+    .container ul li {
+        width: 40%;
+        margin-left: 50px;
     }
 }
 
 @media screen and (max-width:750px) {
     .container {
-        width:100%;
-        padding:0px;
+        width: 100%;
+        padding: 0px;
     }
 
-    .container ul li {
-        float:none;
-        width:90%;
-        margin:40px auto;
-    }
+        .container ul li {
+            float: none;
+            width: 90%;
+            margin: 40px auto;
+        }
 }
 
 .shoppingMargin {
-    float:right;
+    float: right;
     margin: auto 5px auto 0px;
 }
 
-#mousedel , #KBdel , #HPMdel , #HPKBdel , #MicrosoftMdel , #MicrosoftKBdel {
+#mousedel, #KBdel, #HPMdel, #HPKBdel, #MCMdel, #MCKBdel {
     padding: 10px;
     border: none;
     background: none;
@@ -69,14 +72,14 @@
     margin-left: 10px;
 }
 
-#mouseprice , #KBprice , #HPMprice , #HPKBprice , #MicrosoftMprice , #MicrosoftKBprice {
-    padding:0;
-    border:none;
-    background:none;
-    margin-left:10px;
+#mouseprice, #KBprice, #HPMprice, #HPKBprice, #MCMprice, #MCKBprice {
+    padding: 0;
+    border: none;
+    background: none;
+    margin-left: 10px;
 }
 
-#mousetotal, #KBtotal, #HPMtotal, #HPKBtotal, #MicrosoftMtotal, #MicrosoftKBtotal {
+#mousetotal, #KBtotal, #HPMtotal, #HPKBtotal, #MCMtotal, #MCKBtotal {
     padding: 0;
     border: none;
     background: none;
@@ -119,4 +122,3 @@
     background: none;
     margin: auto 95px;
 }
-
