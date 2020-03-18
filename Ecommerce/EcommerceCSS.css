@@ -64,7 +64,7 @@
     margin: auto 10px auto 0px;
 }
 
-#mousedel, #KBdel, #HPMdel, #HPKBdel, #MCMdel, #MCKBdel {
+.del, #KBdel, #HPMdel, #HPKBdel, #MCMdel, #MCKBdel {
     padding: 10px;
     border: none;
     background: none;
@@ -72,14 +72,14 @@
     margin-left: 10px;
 }
 
-#mouseprice, #KBprice, #HPMprice, #HPKBprice, #MCMprice, #MCKBprice {
+.price, #KBprice, #HPMprice, #HPKBprice, #MCMprice, #MCKBprice {
     padding: 0;
     border: none;
     background: none;
     margin-left: 10px;
 }
 
-#mousetotal, #KBtotal, #HPMtotal, #HPKBtotal, #MCMtotal, #MCKBtotal {
+.total, #KBtotal, #HPMtotal, #HPKBtotal, #MCMtotal, #MCKBtotal {
     padding: 0;
     border: none;
     background: none;
