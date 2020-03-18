@@ -75,17 +75,22 @@ const DisplayClearText = () => {
 
 // Generate the item list at home page
 const GenerateItemMenu = () => {
+    let htmlProduct = "";
+    htmlProduct = `<i class="fas fa-shopping-cart shoppingMargin" style="font-size:30px;color:blue;" id="cartTotal"> 0</i>`;
+
+    $("#productRow").html(htmlProduct);
+
     for (var i = 0; i < AllItems.length; i++) {
-        htmlProduct = `
+        debugger
+        htmlProduct = htmlProduct + `
                    <ul>
                    <li>${AllItems[i].ProductName} <br /><br />
                     RM ${AllItems[i].UnitPrice}
                    <button class="addCart" id="${AllItems[i].ID}">Add to cart</button>
                    </li>
                    </ul>`;
-
-        document.getElementById("productRow").innerHTML = document.getElementById("productRow").innerHTML + htmlProduct;
     }
+    $("#productRow").html(htmlProduct);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
