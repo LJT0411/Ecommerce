@@ -70,6 +70,12 @@
     <Content Include="EcommerceCSS.css" />
     <Content Include="EcommerceHP.html" />
     <Content Include="EcommerceJS.js" />
+    <Content Include="img\HPKeyboard.jfif" />
+    <Content Include="img\HPMouse.jpg" />
+    <Content Include="img\LogitechKeyboard.png" />
+    <Content Include="img\LogitechMouse.jpg" />
+    <Content Include="img\MicrosoftKeyboard.jpg" />
+    <Content Include="img\MicrosoftMouse.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

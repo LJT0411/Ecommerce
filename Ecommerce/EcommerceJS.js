@@ -18,42 +18,50 @@ const AllItems = [
         ProductName: "Logitech Mouse",
         UnitPrice: 45,
         Quantity: 1,
-        TotalPrice: 45
+        TotalPrice: 45,
+        img: "LogitechMouse.jpg",
+        width:"50"
     },
     {
         ID: 2,
         ProductName: "Logitech Keyboard",
         UnitPrice: 50,
         Quantity: 1,
-        TotalPrice: 50
+        TotalPrice: 50,
+        img: "LogitechKeyboard.png",
+        width:"100"
     },
     {
         ID: 3,
         ProductName: "HP Mouse",
         UnitPrice: 35,
         Quantity: 1,
-        TotalPrice: 35
+        TotalPrice: 35,
+        img: "HPMouse.jpg"
     },
     {
         ID: 4,
         ProductName: "HP Keyboard",
         UnitPrice: 32,
         Quantity: 1,
-        TotalPrice: 32
+        TotalPrice: 32,
+        img: "HPKeyboard.jfif"
     },
     {
         ID: 5,
         ProductName: "Microsoft Mouse",
         UnitPrice: 43,
         Quantity: 1,
-        TotalPrice: 43
+        TotalPrice: 43,
+        img: "MicrosoftMouse.jpg"
     },
     {
         ID: 6,
         ProductName: "Microsoft Keyboard",
         UnitPrice: 39,
         Quantity: 1,
-        TotalPrice: 39
+        TotalPrice: 39,
+        img: "MicrosoftKeyboard.jpg"
     }
 ];
 
@@ -95,8 +103,9 @@ const GenerateItemMenu = () => {
     for (var i = 0; i < AllItems.length; i++) {
         htmlProduct = htmlProduct + `
                    <ul>
-                   <li>${AllItems[i].ProductName} <br /><br />
-                    RM ${AllItems[i].UnitPrice}
+                   <li>${AllItems[i].ProductName} <br />
+                    RM ${AllItems[i].UnitPrice} <br/>
+                   <img src=${"img/" + AllItems[i].img} width=${AllItems[i].width} height="50"/>
                    <button class="addCart" value="${AllItems[i].ProductName}">Add to cart</button>
                    </li>
                    </ul>`;

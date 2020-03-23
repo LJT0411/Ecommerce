@@ -36,7 +36,7 @@
                 background-color: black;
                 text-align: center;
                 color: white;
-                margin: 30px auto;
+                margin: auto auto;
             }
 
 @media screen and (max-width:1250px) {
