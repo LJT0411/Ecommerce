@@ -122,3 +122,8 @@
     background: none;
     margin: auto 95px;
 }
+
+.inputMargin {
+    padding:0;
+    margin: 20px auto auto 9%;
+}

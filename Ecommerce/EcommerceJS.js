@@ -20,7 +20,7 @@ const AllItems = [
         Quantity: 1,
         TotalPrice: 45,
         img: "LogitechMouse.jpg",
-        width:"50"
+        width: "50"
     },
     {
         ID: 2,
@@ -29,7 +29,7 @@ const AllItems = [
         Quantity: 1,
         TotalPrice: 50,
         img: "LogitechKeyboard.png",
-        width:"100"
+        width: "100"
     },
     {
         ID: 3,
@@ -94,23 +94,35 @@ const DisplayClearText = () => {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Generate the item list at home page
-const GenerateItemMenu = () => {
+const GenerateItemMenu = a => {
+    debugger
     let htmlProduct = "";
-    htmlProduct = `<i class="fas fa-shopping-cart shoppingMargin" style="font-size:30px;color:blue;" id="cartTotal"> 0</i>`;
+    
+    htmlProduct = htmlProduct + `
+                  <i class="fas fa-shopping-cart shoppingMargin showCart" style="font-size:30px;color:blue;" id="cartTotal"> ${ItemCart.length}</i>`;
 
     $("#productRow").html(htmlProduct);
 
-    for (var i = 0; i < AllItems.length; i++) {
+    htmlProduct += PrintItems(a);
+
+    $("#productRow").html(htmlProduct);
+}
+
+const PrintItems = a => {
+    debugger
+    let htmlProduct = "";
+    for (var i = 0; i < a.length; i++) {
         htmlProduct = htmlProduct + `
                    <ul>
-                   <li>${AllItems[i].ProductName} <br />
-                    RM ${AllItems[i].UnitPrice} <br/>
-                   <img src=${"img/" + AllItems[i].img} width=${AllItems[i].width} height="50"/>
-                   <button class="addCart" value="${AllItems[i].ProductName}">Add to cart</button>
+                   <li>${a[i].ProductName} <br />
+                    RM ${a[i].UnitPrice} <br/>
+                   <img src=${"img/" + a[i].img} width=${a[i].width} height="50"/>
+                   <button class="addCart" value="${a[i].ProductName}">Add to cart</button>
                    </li>
                    </ul>`;
     }
-    $("#productRow").html(htmlProduct);
+    return htmlProduct;
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,7 +160,8 @@ const DeleteItem = () => {
         $("#OrderSummary").html("");
         $("#cartList").html("");
         $("#cartTotal").html(0);
-        $("#cartList").append("<button id=ClearAll>");
+        $("#List").hide();
+        $("#ClearAll").hide();
         ClearTextAppear = false;
         cartLength = false;
         ItemTotal = 0;
@@ -178,7 +191,8 @@ const ClearCart = () => {
     $("#OrderSummary").html("");
     $("#cartList").html("");
     $("#cartTotal").html(0);
-    $("#cartList").append("<button id=ClearAll>");
+    $("#List").hide();
+    $("#ClearAll").hide();
     cart = [];
     ItemCart = [];
     AllItems.Quantity = 1;
@@ -250,12 +264,10 @@ const ReduceOrderSummary = (a) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-$(document).ready(function () {
-    GenerateItemMenu();
-    GenerateList();
-
+// add to cart button function
+const addCartButton = () => {
     $(".addCart").click(function (num) {
-
+        debugger
         // Grab the value which button you clicked
         var value = num.target.value;
 
@@ -283,6 +295,9 @@ $(document).ready(function () {
             $(chartlist).append(`<button class=price id=${item[0].UnitPrice} value="${item[0].ID}">${item[0].UnitPrice}</button>`);
             $(chartlist).append(`<button class=del value="${item[0].ID}">x</button>`);
             $("#cartList").append(chartlist);
+
+            $("#List #ClearAll").show();
+
             AddToCartClicked = true;
 
             item[0].Quantity = 1;
@@ -313,6 +328,9 @@ $(document).ready(function () {
             $(".minus").click(function (val) {
 
                 if (item[0].ID == val.target.value) {
+                    // Example: you clicked LG Mouse minus button
+                    // minusItem will become the LG Mouse quantity
+                    // minusItem used for the $("#minusItem").html() to update the quantity
                     var minusItem = item[0].Quantity;
                     // This if statement is to prevent the total become 0
                     if (item[0].Quantity != 1) {
@@ -375,9 +393,43 @@ $(document).ready(function () {
         DisplayClearText();
         OrderSummary();
     })
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const inputText = () => {
+    // On key up to search the item
+    var input = $(".inputText").val();
+    var item = AllItems.filter(c => c.ProductName.toLowerCase().includes(input));
+
+    GenerateItemMenu(item);
+    addCartButton();
+}
+
+$(document).ready(function () {
+    // Create a search box
+    let htmlProduct = "";
+    
+    htmlProduct = htmlProduct + `
+                  <input type="text" onkeyup="inputText()" class="inputMargin inputText" placeholder="Enter your item"  />`;
+
+    $("#textbox").html(htmlProduct);
+
+    ///////////////////////////
+
+    // Print the products
+    GenerateItemMenu(AllItems);
+    GenerateList();
+
+    // button .click function method
+    addCartButton();
+
+    $("#cartTotal").click(function () {
+        if (ItemCart.length != 0) {
+            $("#List").toggle();
+        }
+    })
 
     $("#ClearAll").click(function () {
         ClearCart();
     })
-
 })
