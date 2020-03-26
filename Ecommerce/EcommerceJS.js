@@ -357,6 +357,7 @@ const addCartButton = () => {
             // Everytime u click the x at the list there, it will run this function
             $(".del").click(function (val) {
                 if (item[0].ID == val.target.value) {
+                    debugger
                     // Remove the list
                     $(this).parent().remove();
                     // ItemTotal at Order Summary there will minus the total of mouse quantity
@@ -369,9 +370,17 @@ const addCartButton = () => {
                     // from this ItemCart.indexOf(b), item will become 1
                     // use .splice() to remove the item that you want to
                     // .splice(item,1) that 1 is delete count that you want to delete
+                    // This .indexOf can be used only if ur array just got 1 item, example your array only got productname thn u can use this
                     var items = ItemCart.indexOf(item[0].ProductName);
                     ItemCart.splice(items, 1);
                     DeleteItem();
+
+                    // This is another way to get the item if ur array got many items, exampl your array got id, productname,unitprice
+                    // This .map will loop your array, and compare the thing that you want to, after that it will grab the array location
+                    // Example you got 3 items inside this cart array = [0,1,2] If u wan to get the 2 inside the array
+                    // you can use this .map loop the cart array, and compare the thing to get the place where the second item at.
+                    // your getProduct will become 1 because ur second item is at second slot.
+                    // var getProduct = cart.map(function (x) { return x.id }).indexOf(getProductDetails[0].id);
                 }
             })
 
