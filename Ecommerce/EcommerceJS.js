@@ -95,13 +95,12 @@ const DisplayClearText = () => {
 
 // Generate the item list at home page
 const GenerateItemMenu = a => {
-    debugger
     let htmlProduct = "";
     
-    htmlProduct = htmlProduct + `
-                  <i class="fas fa-shopping-cart shoppingMargin showCart" style="font-size:30px;color:blue;" id="cartTotal"> ${ItemCart.length}</i>`;
+    //htmlProduct = htmlProduct + `
+    //              <i class="fas fa-shopping-cart shoppingMargin showCart" style="font-size:30px;color:blue;" id="cartTotal"> ${ItemCart.length}</i>`;
 
-    $("#productRow").html(htmlProduct);
+    //$("#productRow").html(htmlProduct);
 
     htmlProduct += PrintItems(a);
 
@@ -109,7 +108,6 @@ const GenerateItemMenu = a => {
 }
 
 const PrintItems = a => {
-    debugger
     let htmlProduct = "";
     for (var i = 0; i < a.length; i++) {
         htmlProduct = htmlProduct + `
@@ -267,7 +265,6 @@ const ReduceOrderSummary = (a) => {
 // add to cart button function
 const addCartButton = () => {
     $(".addCart").click(function (num) {
-        debugger
         // Grab the value which button you clicked
         var value = num.target.value;
 
@@ -357,7 +354,6 @@ const addCartButton = () => {
             // Everytime u click the x at the list there, it will run this function
             $(".del").click(function (val) {
                 if (item[0].ID == val.target.value) {
-                    debugger
                     // Remove the list
                     $(this).parent().remove();
                     // ItemTotal at Order Summary there will minus the total of mouse quantity
@@ -406,9 +402,10 @@ const addCartButton = () => {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const inputText = () => {
+    debugger
     // On key up to search the item
     var input = $(".inputText").val();
-    var item = AllItems.filter(c => c.ProductName.toLowerCase().includes(input));
+    var item = AllItems.filter(c => c.ProductName.toLowerCase().includes(input.toLowerCase()));
 
     GenerateItemMenu(item);
     addCartButton();
@@ -419,7 +416,8 @@ $(document).ready(function () {
     let htmlProduct = "";
     
     htmlProduct = htmlProduct + `
-                  <input type="text" onkeyup="inputText()" class="inputMargin inputText" placeholder="Enter your item"  />`;
+                  <input type="text" onkeyup="inputText()" class="inputMargin inputText" placeholder="Enter your item"  />
+                  <i class="fas fa-shopping-cart shoppingMargin showCart" style="font-size:30px;color:blue;" id="cartTotal"> ${ItemCart.length}</i>`;
 
     $("#textbox").html(htmlProduct);
 
